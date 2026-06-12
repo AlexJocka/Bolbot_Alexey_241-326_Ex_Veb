@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Новая рецензия | Электронная библиотека{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Новая рецензия</h1>
+<p class="text-muted">Книга: {{ book.title }}</p>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post" action="{{ url_for('books.new_review', book_id=book.id) }}">
+            <div class="mb-3">
+                <label class="form-label" for="rating">Оценка</label>
+                <select class="form-select" id="rating" name="rating">
+                    {% for value, label in rating_options %}
+                        <option value="{{ value }}" {% if form.rating|string == value|string %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="text">Текст рецензии</label>
+                <textarea class="form-control" id="text" name="text" rows="8" required>{{ form.text }}</textarea>
+            </div>
+            <button class="btn btn-dark" type="submit">Сохранить</button>
+            <a class="btn btn-outline-secondary" href="{{ url_for('books.show', book_id=book.id) }}">Отмена</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    if (window.EasyMDE) {
+        new EasyMDE({ element: document.getElementById('text'), spellChecker: false });
+    }
+</script>
+{% endblock %}

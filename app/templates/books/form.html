@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% from 'macros/book_form.html' import render_book_form %}
+
+{% block title %}{{ title }} | Электронная библиотека{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{{ title }}</h1>
+<div class="card">
+    <div class="card-body">
+        {{ render_book_form(form, genres, selected_genre_ids, action, with_cover) }}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    if (window.EasyMDE) {
+        new EasyMDE({ element: document.getElementById('short_description'), spellChecker: false });
+    }
+</script>
+{% endblock %}

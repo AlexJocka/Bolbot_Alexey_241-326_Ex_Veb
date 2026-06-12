@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Virtual environments
+ve/
+venv/
+.venv/
+ve311/
+
+# Flask / local data
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded/generated files
+app/static/uploads/covers/*
+!app/static/uploads/covers/.gitkeep
+
+# IDE / OS
+.idea/
+.DS_Store
+
+# Local archives
+*.zip

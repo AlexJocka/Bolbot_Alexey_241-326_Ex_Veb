@@ -1,0 +1,23 @@
+{% macro render_pagination(pagination, endpoint) %}
+    {% if pagination.pages > 1 %}
+    <nav aria-label="Пагинация">
+        <ul class="pagination justify-content-center mt-4">
+            <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for_page(endpoint, pagination.prev_num) if pagination.has_prev else '#' }}">Назад</a>
+            </li>
+            {% for page in pagination.iter_pages() %}
+                {% if page %}
+                    <li class="page-item {% if page == pagination.page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for_page(endpoint, page) }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for_page(endpoint, pagination.next_num) if pagination.has_next else '#' }}">Вперёд</a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+{% endmacro %}
